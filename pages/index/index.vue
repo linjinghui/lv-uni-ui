@@ -1,5 +1,98 @@
 <template>
 	<view class="page">
+		<!-- <scroll-view scroll-with-animation :scroll-top="scrollTop" scroll-y="true" style="height: 90%;" @scroll="handleScroll" ></scroll-view> -->
+		
+		<view class="section">
+			<text>分割线</text>
+			<view>
+				<lv-divider type="dashed" lin-color="green" background="blue" style="color: #FFFFFF;width: 200px;">Hello world</lv-divider>
+			</view>
+		</view>
+		
+		<view class="section">
+			<text>倒计时</text>
+			<view style="padding-left: 10px;">
+				<lv-countdown show-colon :second="86400" border-color="purple" color="red" splitor-color="blue" />
+			</view>
+		</view>
+		
+		<view class="section">
+			<text>进步条</text>
+			<view style="padding-left: 10px;">
+				<lv-number-box :min="0.1" :max="0.5" :step="0.1" :value="0.1" />
+			</view>
+		</view>
+		
+		<view class="section">
+			<text>列表</text>
+			<view>
+				<lv-list padding="10px">
+					<lv-list-cell label="发票类型" value="电子普通发票-个人-商品明细电子普通发票-个人-商品明细" arrow></lv-list-cell>
+					<lv-list-cell>
+						<text slot="left" style="color: #05B4C4;">实付金额</text>
+						<lv-money slot="right" val="10.3" color="red" size="20px"></lv-money>
+					</lv-list-cell>
+					<lv-list-cell :left-icon="{icon:'shop',size:'40px',color:'red'}" arrow >
+						<lv-row slot="left" align="start">
+							<lv-col style="color: #05B4C4;">包裹1:顺丰快递</lv-col>
+							<lv-col style="color: #999999;font-size: 12px;">物流单号：11407545000453701</lv-col>
+						</lv-row>
+					</lv-list-cell>
+					<lv-list-cell :left-icon="{icon:'shop',size:'40px',color:'red'}" >
+						<lv-row slot="left" align="start">
+							<lv-col style="color: #05B4C4;">包裹1:顺丰快递</lv-col>
+							<lv-col style="color: #999999;font-size: 12px;">物流单号：11407545000453701</lv-col>
+						</lv-row>
+						<lv-button slot="right" radius="half" type="primary" plain style="flex: 0.5;height: 24px;">修改</lv-button>
+					</lv-list-cell>
+				</lv-list>
+			</view>
+		</view>
+		
+		<view class="section">
+			<text>金额</text>
+			<view>
+				<lv-money val="10.3" color="red" size="20px" unit-size="12px" through></lv-money>
+			</view>
+		</view>
+		
+		<view class="section">
+			<text>列</text>
+			<view>
+				<lv-row style="height: 100px;border: solid 1px;">
+					<lv-row direction="row" style="width: 100%;flex-grow: 2;background-color: #007AFF;">1</lv-row>
+					<lv-row direction="row" style="width: 100%;flex-grow: 3;background-color: #ADE0E4">2</lv-row>
+					<lv-row direction="row" style="width: 100%;flex-grow: 6;background-color: #DD524D">3</lv-row>
+				</lv-row>
+			</view>
+		</view>
+		
+		<view class="section">
+			<text>九宫格</text>
+			<view>
+				<lv-row direction="row" justify="between">
+					<lv-col square basis="33.33%" style="background-color: #ADE0E4;">
+						<lv-row justify="center" style="height: 100%;">a</lv-row>
+					</lv-col>
+					<lv-col square basis="33.33%" style="background-color: #007AFF">
+						<lv-row justify="center" style="height: 100%;">b</lv-row>
+					</lv-col>
+					<lv-col square basis="33.33%" style="background-color: #DBF1E1">
+						<lv-row justify="center" style="height: 100%;">c</lv-row>
+					</lv-col>
+				</lv-row>
+				<lv-row direction="row" justify="between">
+					<lv-col square basis="33.33%" style="background-color: #007AFF;">1</lv-col>
+					<lv-col square basis="33.33%" style="background-color: #DBF1E1;">2</lv-col>
+					<lv-col square basis="33.33%" style="background-color: #ADE0E4;">3</lv-col>
+				</lv-row>
+				<lv-row direction="row" justify="between">
+					<lv-col square basis="33.33%" style="background-color: #ADE0E4;">1</lv-col>
+					<lv-col square basis="33.33%" style="background-color: #007AFF">2</lv-col>
+					<lv-col square basis="33.33%" style="background-color: #DBF1E1">3</lv-col>
+				</lv-row>
+			</view>
+		</view>
 		
 		<view class="section">
 			<text>全局loading</text>
@@ -179,6 +272,13 @@
 				<lv-button ref="scode" radius="half" type="success" time="60" @click="clkScode">倒计时</lv-button>
 			</view>
 		</view>
+		
+		
+		
+		<!-- page 滚动置顶
+		<lv-scroll-top :real-scroll-top="realScrollTop" />-->
+		<!-- scroll-view 组件置顶  -->
+		<lv-scroll-top :real-scroll-top="realScrollTop" @scroll-top="handleScrollTop" />
 		
 	</view>
 </template>
@@ -423,15 +523,23 @@
 					'default-type': 'label',	
 					// 是否需要隐藏区县，默认为false
 					'hide-area': false	
-				}
+				},
+				scrollTop: 0,
+				realScrollTop: 0
 			}
 		},
 		onLoad() {
-			
+			// setTimeout(() => {
+			// 	console.log('=========');
+			// 	this.$refs.scrollView.scrollTo(0, 'y');
+			// }, 5000)
 		},
 		watch: {
 			name (val) {
 				console.log('=watch= name=', val)
+			},
+			scrollTop (val) {
+				console.log('=watch= scrollTop=', val)
 			}
 		},
 		methods: {
@@ -481,7 +589,19 @@
 				setTimeout(() => {
 					this.$hideLoading();
 				}, 3000);
+			},
+			handleScroll: function(e) {
+				this.realScrollTop = e.detail.scrollTop;
+			},
+			handleScrollTop () {
+				this.scrollTop = 1;
+				this.$nextTick(function(){
+					this.scrollTop = 0;
+				});
 			}
+		},
+		onPageScroll (e) {
+			this.realScrollTop = e.scrollTop;
 		}
 	}
 </script>

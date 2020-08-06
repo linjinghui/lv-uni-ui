@@ -2,7 +2,8 @@
 <template>
 	<view class="lv-row" 
 		:style="[{
-			'flex-direction': direction,
+			'flex-direction': direction === 'row' && direction,
+			'flex-flow': direction === 'column' && direction,
 			'align-items': align === 'start' ? 'flex-start' : align === 'end' ? 'flex-end' : 'center', 
 			'justify-content': justify === 'start' ? 'flex-start' : justify === 'end' ? 'flex-end' : justify === 'around' ? 'space-around' : justify === 'between' ? 'space-between' : 'center' 
 		}]">
@@ -40,7 +41,7 @@
 		position: relative;
 		display: flex;
 		flex-shrink: 0;
-		flex-direction: column;
+		// flex-direction: column;
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;

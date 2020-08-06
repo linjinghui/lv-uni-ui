@@ -1,9 +1,10 @@
 <!-- 图片组件
- 1、必须设置宽、高-->
+ 1、必须设置宽、高
+ 支持懒加载-->
 <template>
 	<view class="lv-image flex" @click="_onClick">
 		<image class="lv-image-def" :src="defSrc" mode="aspectFit" v-if="showDef" />
-		<image :src="src" :mode="mode" :show-menu-by-longpress="true" :lazy-load="true" :style="{'opacity':showDef?0:1}" @load="picLoad" />
+		<image :class="cls" :src="psrc" :mode="mode" :show-menu-by-longpress="true" :lazy-load="true" :style="{'opacity':showDef?0:1}" @load="picLoad" />
 	</view>
 </template>
 
@@ -27,11 +28,21 @@
 		},
 		data() {
 			return {
-				showDef: true
+				cls: 'LvImage_' + new Date().getTime() + parseInt(Math.random() * 100),
+				showDef: true,
+				psrc: ''
 			}
 		},
-		computed: {
-			
+		mounted () {
+			// 图片懒加载，进入可视区域后才开始加载
+			let observer = uni.createIntersectionObserver(this);
+			observer.relativeTo('.page').observe('.' + this.cls, (res) => {
+				if (res.intersectionRatio > 0) {
+					// 进入可视区域
+					this.psrc = this.src;
+					observer.disconnect();
+				}
+			});
 		},
 		methods: {
 			picLoad () {
