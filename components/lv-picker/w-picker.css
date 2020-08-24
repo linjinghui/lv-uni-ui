@@ -29,10 +29,10 @@
 	/* #ifndef APP-NVUE */
 	text-align: center;
 	width: 100%;
+	white-space: nowrap;
 	/* #endif */
-  height: 88upx;
-  line-height: 88upx;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 30upx;
+	height: 88upx;
+	line-height: 88upx;
+	text-overflow: ellipsis;
+	font-size: 30upx;
 }

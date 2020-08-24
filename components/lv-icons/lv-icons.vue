@@ -48,7 +48,7 @@
 		data() {
 			return {
 				icons: icons,
-				imgPath: '/static/components/lv-icons/'
+				imgPath: '/static/images/components/lv-icons/'
 			}
 		},
 		computed: {

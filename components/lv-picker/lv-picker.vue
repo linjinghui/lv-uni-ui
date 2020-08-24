@@ -244,9 +244,9 @@
 				}
 			},
 			handlerChange(res){
-				let _this=this;
-				this.result={...res};
-				this.$emit("confirm",this.result);
+				let result = JSON.stringify(this.result);
+				this.result = { ...res };
+				result === '{}' && this.$emit("confirm",this.result);
 			},
 			show(){
 				this.$emit("update:visible",true);
@@ -276,7 +276,9 @@
 	  height: 88upx;
 	  line-height: 88upx;
 	  text-overflow: ellipsis;
+	  /* #ifndef APP-NVUE */
 	  white-space: nowrap;
+	  /* #endif */
 	  font-size: 30upx;
 	}
 	.w-picker{
@@ -310,11 +312,14 @@
 	  bottom: 0;
 	  left: 0;
 	  right: 0;
+	  /* #ifdef APP-NVUE */
+	  transform: translateY(1500px);
+	  /* #endif */
 	  /* #ifndef APP-NVUE */
 	  width: 100%;
+	  transform: translateY(100%);
 	  /* #endif */
 	  transition: transform 0.3s ease;
-	  transform: translateY(100%);
 	}
 	.w-picker-cnt-visible {
 	  transform: translateY(0);
@@ -343,7 +348,9 @@
 	}
 	
 	.w-picker-hd:after {
+	  /* #ifndef APP-NVUE */
 	  content: ' ';
+	  /* #endif */
 	  position: absolute;
 	  left: 0;
 	  bottom: 0;

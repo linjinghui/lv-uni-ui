@@ -14,7 +14,7 @@
 		props: {
 			// 默认图片地址
 			defSrc: {
-			    default: '/static/components/lv-image/default.png'
+			    default: '/static/images/components/lv-image/default.png'
 			},
 			// 真实图片地址
 			src: {
