@@ -1,11 +1,12 @@
 <template name="w-picker">
 	<view class="w-picker" :key="createKey" :data-key="createKey">
-		<view class="mask" :class="{'visible':visible}" @tap="onCancel" @touchmove.stop.prevent catchtouchmove="true"></view>
-		<view class="w-picker-cnt" :class="{'visible':visible}">
+		<view class="mask" :class="{'mask-visible':visible}" @tap="onCancel" @touchmove.stop.prevent="" catchtouchmove="true"></view>
+		<!--  -->
+		<view class="w-picker-cnt" :class="{'w-picker-cnt-visible':visible}" >
 			<view class="w-picker-header"  @touchmove.stop.prevent catchtouchmove="true">
-				<text @tap.stop.prevent="onCancel">取消</text>
+				<text class="text" @tap.stop.prevent="onCancel">取消</text>
 				<slot></slot>
-				<text class="w-picker-confirm" :style="{'color':themeColor}" @tap.stop.prevent="pickerConfirm">确定</text>
+				<text class="text w-picker-confirm" :style="'color:' + themeColor" @tap.stop.prevent="pickerConfirm">{{themeColor}}确定</text>
 			</view>
 			<date-picker 
 				v-if="mode=='date'" 
@@ -280,65 +281,84 @@
 	}
 	.w-picker{
 		z-index: 888;
-		.mask {
-		  position: fixed;
-		  z-index: 1000;
-		  top: 0;
-		  right: 0;
-		  left: 0;
-		  bottom: 0;
-		  background: rgba(0, 0, 0, 0.6);
-		  visibility: hidden;
-		  opacity: 0;
-		  transition: all 0.3s ease;
-		}
-		.mask.visible{
-			visibility: visible;
-			opacity: 1;
-		}
-		.w-picker-cnt {
-		  position: fixed;
-		  bottom: 0;
-		  left: 0;
-		  width: 100%;
-		  transition: all 0.3s ease;
-		  transform: translateY(100%);
-		  z-index: 3000;
-		  background-color: #fff;
-		}
-		.w-picker-cnt.visible {
-		  transform: translateY(0);
-		}
-		.w-picker-header{
-		  display: flex;
-		  align-items: center;
-		  padding: 0 30upx;
-		  height: 88upx;
-		  background-color: #fff;
-		  position: relative;
-		  text-align: center;
-		  font-size: 32upx;
-		  justify-content: space-between;
-		  border-bottom: solid 1px #eee;
-		  .w-picker-btn{
-		  	font-size: 30upx;
-		  }
-		}
-		
-		.w-picker-hd:after {
-		  content: ' ';
-		  position: absolute;
-		  left: 0;
-		  bottom: 0;
-		  right: 0;
-		  height: 1px;
-		  border-bottom: 1px solid #e5e5e5;
-		  color: #e5e5e5;
-		  transform-origin: 0 100%;
-		  transform: scaleY(0.5);
-		}
 	}
+	
+	.mask {
+	  position: fixed;
+	  z-index: 1000;
+	  top: 0;
+	  right: 0;
+	  // left: 0;
+	  bottom: 0;
+	  background-color: rgba(0, 0, 0, 0.6);
+	  /* #ifndef APP-NVUE */
+	  visibility: hidden;
+	  opacity: 0;
+	  transition: all 0.3s ease;
+	  /* #endif */
+	}
+	.mask-visible{
+		left: 0;
+		/* #ifndef APP-NVUE */
+		visibility: visible;
+		opacity: 1;
+		/* #endif */
+	}
+	.w-picker-cnt {
+	  position: fixed;
+	  z-index: 1003;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  /* #ifndef APP-NVUE */
+	  width: 100%;
+	  /* #endif */
+	  transition: transform 0.3s ease;
+	  transform: translateY(100%);
+	}
+	.w-picker-cnt-visible {
+	  transform: translateY(0);
+	}
+	.w-picker-header{
+		/* #ifdef APP-NVUE */
+		flex-direction: row;
+		/* #endif */
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+	  align-items: center;
+	  padding: 0 30upx;
+	  height: 88upx;
+	  background-color: #fff;
+	  position: relative;
+	  text-align: center;
+	  font-size: 32upx;
+	  justify-content: space-between;
+	  border-bottom-style: solid;
+	  border-bottom-width: 1px;
+	  border-bottom-color: #eee;
+	  // .w-picker-btn{
+	  // 	font-size: 30upx;
+	  // }
+	}
+	
+	.w-picker-hd:after {
+	  content: ' ';
+	  position: absolute;
+	  left: 0;
+	  bottom: 0;
+	  right: 0;
+	  height: 1px;
+	  border-bottom-style: solid;
+	  border-bottom-width: 1px;
+	  border-bottom-color: #e5e5e5;
+	  color: #e5e5e5;
+	  transform-origin: 0 100%;
+	  transform: scaleY(0.5);
+	}
+	
 	.w-picker-confirm {
 		color: $lv-theme-color;
 	}
+	
 </style>

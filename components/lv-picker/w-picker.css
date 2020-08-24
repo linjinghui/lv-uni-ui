@@ -5,7 +5,12 @@
 	flex:1;
 }
 .w-picker-view {
+	/* #ifdef APP-NVUE */
+	flex: 1;
+	/* #endif */
+	/* #ifndef APP-NVUE */
 	width: 100%;
+	/* #endif */
 	height: 476upx;
 	overflow: hidden;
 	background-color: rgba(255, 255, 255, 1);
@@ -16,8 +21,15 @@
 }
 
 .w-picker-item {
-  text-align: center;
-  width: 100%;
+	/* #ifdef APP-NVUE */
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	/* #endif */
+	/* #ifndef APP-NVUE */
+	text-align: center;
+	width: 100%;
+	/* #endif */
   height: 88upx;
   line-height: 88upx;
   text-overflow: ellipsis;

@@ -1,14 +1,14 @@
 <!-- 复选框|单选框 组件 -->
 <template>
 	<view class="lv-checkbox flex" 
-		:class="[{'active': touchStart, 'disabled': disabled}]"
+		:class="{'active': touchStart, 'disabled': disabled}"
 		@touchstart="mousedown"
 		@touchend="mouseup"
 		@click="_onClick">
 		<view class="checkbox flex" :class="[shape, selected && theme]" :style="{width: size, height: size}">
-			<lv-icons class="tick" :size="size" type="checkmarkempty" v-if="selected"></lv-icons>
+			<lv-icons class="tick" :class="theme + '-tick'" :size="size" type="checkmarkempty" v-if="selected"></lv-icons>
 		</view>
-		<slot></slot>
+		<text class="text">{{text}}</text>
 	</view>
 </template>
 
@@ -47,6 +47,10 @@
 			// 复选框大小
 			size: {
 				default: '38upx'
+			},
+			// 文本
+			text: {
+				default: ''
 			},
 			// 操作前执行，运行done回调，执行后续选中或取消选中功能
 			before: {
@@ -134,7 +138,9 @@
 		border-width: 1px;
 		border-color: $lv-border-color;
 		border-radius: 2px;
+		/* #ifndef APP-NVUE */
 		transition: all .3s;
+		/* #endif */
 	}
 	.circle {
 		border-radius: 50px;
@@ -145,7 +151,10 @@
 	}
 	// 禁用
 	.disabled {
-		opacity: 0.7;
+		opacity: 0.6;
+	}
+	.tick {
+		color: #ffffff;
 	}
 	
 	// 主题设置
@@ -199,5 +208,21 @@
 		color: $lv-theme-color;
 		background-color: $lv-theme-color-plain;
 		border-color: $lv-theme-color;
+	}
+	
+	.primary-plain-tick {
+		color: $lv-color-primary;
+	}
+	.error-plain-tick {
+		color: $lv-color-error;
+	}
+	.warning-plain-tick {
+		color: $lv-color-warning;
+	}
+	.success-plain-tick {
+		color: $lv-color-success;
+	}
+	.theme-plain-tick {
+		color: $lv-theme-color;
 	}
 </style>

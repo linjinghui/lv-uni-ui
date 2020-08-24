@@ -1,15 +1,15 @@
 <!-- 输入框 组件 -->
 <template>
 	<view class="lv-input flex">
-		<input class="input" placeholder-class="placeholder" 
-			:type="ptype" :value="inputValue" :placeholder="(type==='search' ? '\ue621 ' : '') + placeholder" :disabled="type==='selector'||type==='time'||type==='date'||type==='range'||type==='half'||type==='shortTerm'||type==='region'||disabled" 
+		<input class="input text" placeholder-class="placeholder" 
+			:type="ptype" :value="inputValue" :placeholder="((type==='search' && platform !== 'nvue') ? '\ue621 ' : '') + placeholder" :disabled="type==='selector'||type==='time'||type==='date'||type==='range'||type==='half'||type==='shortTerm'||type==='region'||disabled" 
 			:maxlength="maxlength" :focus="focus" :confirm-type="type==='search' ? 'search' : confirmType"
 			@input="handleInput" @focus="handleFocus" @blur="handleBlur" @confirm="handleConfirm" @keyboardheightchange="keyboardheightchange" @click="handleClick" />
-		<lv-icons class="icon" type="clear" size="16px" @click="clear" v-if="type!=='selector'&&type!=='time'&&type!=='date'&&type!=='range'&&type!=='half'&&type!=='shortTerm'&&type!=='region'&&inputValue.length>0" />
+		<lv-icons class="icon" type="clear" size="16px" @click="clear" v-if="type!=='selector'&&type!=='time'&&type!=='date'&&type!=='range'&&type!=='half'&&type!=='shortTerm'&&type!=='region'&&inputValue&&inputValue.length>0" />
 		<lv-icons class="icon" :type="ptype==='text'?'eye':'eye-slash'" size="20px" @click="togglePwd" v-if="type==='password'" />
 		<lv-image class="captcha" :src="captcha" @click="clkCaptcha" v-if="type==='captcha'"></lv-image>
-		<lv-button class="sms-code" ref="smsCode" radius="small" type="theme" time="60" @click="clkSmsCode" v-if="type==='smscode'">获取验证码</lv-button>
-		<lv-icons class="icon" :class="{'arrowup': selectorVisible}" type="arrowdown" size="16px" @click="showPicker" v-if="type==='selector'||type==='time'||type==='date'||type==='range'||type==='half'||type==='shortTerm'||type==='region'" />
+		<lv-button class="sms-code" ref="smsCode" radius="small" type="theme" time="60" text="验证码" @click="clkSmsCode" v-if="type==='smscode'"></lv-button>
+		<lv-icons class="icon" :class="selectorVisible ? 'arrowup' : ''" type="arrowdown" size="16px" @click="showPicker" v-if="type==='selector'||type==='time'||type==='date'||type==='range'||type==='half'||type==='shortTerm'||type==='region'" />
 		<slot name="right"></slot>
 		
 		<lv-picker ref="selector" :visible.sync="selectorVisible" v-bind="cselector" 
@@ -67,7 +67,25 @@
 				selectorVisible: false
 			}
 		},
+		watch: {
+			selectorVisible (data) {
+				console.log('==wathch selectorVisible==', data)
+			}
+		},
 		computed: {
+			platform () {
+				let platform = 'h5';
+				// #ifdef APP-PLUS
+				platform = uni.getSystemInfoSync().platform;
+				// #endif
+				// #ifdef MP-WEIXIN
+				platform = 'weixin';
+				// #endif
+				// #ifdef APP-NVUE
+				platform = 'nvue';
+				// #endif
+				return platform;
+			},
 			cselector () {
 				let def = {
 					mode: this.type
@@ -109,10 +127,10 @@
 				this.$emit('search', this.inputValue);
 			},
 			clkCaptcha () {
-				this.$emit('click-captcha');
+				this.$emit('captcha');
 			},
 			clkSmsCode () {
-				this.$emit('click-smscode');
+				this.$emit('send');
 			},
 			// 开始计时
 			startTiming () {
@@ -125,7 +143,10 @@
 				this.inputValue = data.result;
 				this.$emit('change', data);
 			},
-			handleCancel () {},
+			handleCancel () {
+				console.log('=handleCancel=');
+				this.selectorVisible = false;
+			},
 			handleClick () {
 				if (this.type === 'selector' || this.type === 'time' || this.type === 'date' || this.type === 'range' || this.type === 'half' || this.type === 'shortTerm' || this.type === 'region') {
 					this.showPicker();
@@ -154,12 +175,17 @@
 		// padding-left: 10upx;
 		// padding-right: 10upx;
 		height: 40px;
+		/* #ifndef APP-NVUE */
 		font-size: inherit;
+		/* #endif */
 	}
 	.icon {
-		margin-left: 10upx;
+		margin-left: 20upx;
 		color: #999999;
+		/* #ifndef APP-NVUE */
 		transition: all .3s;
+		/* #endif */
+		transform: rotateZ(0deg)
 	}
 	.icon:active {
 		color: #333333;
@@ -170,15 +196,14 @@
 		color: #CBCBCB;
 	}
 	.captcha {
-		margin-left: 10upx;
+		margin-left: 20upx;
 		width: 60px;
 		height: 30px;
 	}
 	.sms-code {
-		margin-left: 10upx;
+		margin-left: 20upx;
 		width: 85px;
 		height: 30px;
-		font-size: 14px;
 	}
 	.arrowup {
 		transform: rotateZ(180deg);

@@ -2,7 +2,9 @@
 	<view class="w-picker-view">
 		<picker-view class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range" :key="index">{{item[nodeKey]}}</view>
+				<view class="w-picker-item" v-for="(item,index) in range" :key="index">
+					<text class="text">{{item[nodeKey]}}</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 	</view>
@@ -126,4 +128,10 @@
 
 <style lang="scss">
 	@import "./w-picker.css";
+	
+	.d-picker-view {
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 </style>

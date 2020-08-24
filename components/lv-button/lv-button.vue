@@ -1,23 +1,28 @@
 <!-- 按钮组件
- 1、倒计时功能-->
+ 1、倒计时功能
+  nvue不支持动画-->
 <template>
 	<view class="lv-button flex" 
-		:class="['radius-' + radius, theme, {'active': touchStart, 'disabled': disabled}]"
+		:class="[ touchStart ? 'active' : '', disabled ? 'disabled' : '', 'radius-' + radius, theme ]"
 		@touchstart="mousedown"
 		@touchend="mouseup"
 		@click="_onClick">
 		<!-- 加载图标 -->
-		<template v-if="startTime">{{ptime + 's'}}</template>
+		<text class="text" :class="theme" v-if="startTime">{{ptime + 's'}}</text>
 		<template v-else>
-			<lv-icons class="lv-icons" move type="spinner-cycle" size="20px" v-if="loading"></lv-icons>
+			<!-- #ifdef APP-PLUS -->
+			<lv-icons class="lv-icons lv-icons-loading" type="spinner-cycle" size="20px" :class="theme" v-if="loading"></lv-icons>
+			<!-- #endif -->
+			<!-- #ifndef APP-PLUS -->
+			<lv-icons class="lv-icons lv-icons-loading" move type="spinner-cycle" size="20px" v-if="loading"></lv-icons>
+			<!-- #endif -->
 			<lv-icons class="lv-icons" :type="icon" size="" v-if="icon"></lv-icons>
-			<slot></slot>
+			<text class="text" :class="theme">{{text}}</text>
 		</template>
 	</view>
 </template>
 
 <script>
-	
 	export default {
 		name: 'LvButton',
 		props: {
@@ -61,6 +66,9 @@
 					// return ['success', 'warning', 'danger'].indexOf(value) !== -1
 					return !value || !isNaN(value);
 				}
+			},
+			text: {
+				default: ''
 			}
 		},
 		data() {
@@ -117,7 +125,9 @@
 		border-style: solid;
 		border-color: $lv-border-color;
 		background-color: #FFFFFF;
+		/* #ifndef APP-PLUS */
 		transition: all .3s;
+		/* #endif */
 	}
 	// 导角设置
 	.radius-small {
@@ -182,14 +192,20 @@
 	// 点击激活
 	.active {
 		opacity: 0.7;
+		// background-color: red!important;
 	}
 	// 禁用
 	.disabled {
-		opacity: 0.7;
+		opacity: 0.5;
 	}
 	
 	.lv-icons {
 		width: 30px;
 		height: 30px;
 	}
+	/* #ifdef APP-PLUS */
+	.lv-icons-loading {
+		line-height: 30px;
+	}
+	/* #endif */
 </style>

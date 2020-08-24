@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import lvloading from './components/lv-loading/lv-loading.js'
+// import lvloading from './components/lv-loading/lv-loading.js'
 
 Vue.config.productionTip = false
 

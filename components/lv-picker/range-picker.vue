@@ -2,25 +2,37 @@
 	<view class="w-picker-view">
 		<picker-view  class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column class="w-picker-flex2">
-				<view class="w-picker-item" v-for="(item,index) in range.fyears" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.fyears" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column class="w-picker-flex2">
-				<view class="w-picker-item" v-for="(item,index) in range.fmonths" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.fmonths" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column class="w-picker-flex2">
-				<view class="w-picker-item" v-for="(item,index) in range.fdays" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.fdays" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column class="w-picker-flex1">
 				<view class="w-picker-item">-</view>
 			</picker-view-column>
 			<picker-view-column class="w-picker-flex2">
-				<view class="w-picker-item" v-for="(item,index) in range.tyears" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.tyears" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column class="w-picker-flex2">
-				<view class="w-picker-item" v-for="(item,index) in range.tmonths" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.tmonths" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column class="w-picker-flex2">
-				<view class="w-picker-item" v-for="(item,index) in range.tdays" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.tdays" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 	</view>
@@ -341,4 +353,9 @@
 
 <style lang="scss">
 	@import "./w-picker.css";
+	.d-picker-view {
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 </style>

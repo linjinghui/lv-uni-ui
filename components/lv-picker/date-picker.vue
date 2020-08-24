@@ -2,77 +2,119 @@
 	<view class="w-picker-view">
 		<picker-view v-if="fields=='year'" class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 		<picker-view v-if="fields=='month'" class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 		<picker-view v-if="fields=='day'" class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 		<picker-view v-if="fields=='hour'" class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">{{item}}时</view>
+				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">
+					<text class="text">{{item}}时</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 		<picker-view v-if="fields=='minute'" class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">{{item}}时</view>
+				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">
+					<text class="text">{{item}}时</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">{{item}}分</view>
+				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">
+					<text class="text">{{item}}分</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 		<picker-view v-if="fields=='second'" class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">{{item}}时</view>
+				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">
+					<text class="text">{{item}}时</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">{{item}}分</view>
+				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">
+					<text class="text">{{item}}分</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.seconds" :key="index">{{item}}秒</view>
+				<view class="w-picker-item" v-for="(item,index) in range.seconds" :key="index">
+					<text class="text">{{item}}秒</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 	</view>
@@ -739,4 +781,9 @@
 
 <style lang="scss">
 	@import "./w-picker.css";
+	.d-picker-view {
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 </style>

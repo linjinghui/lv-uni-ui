@@ -4,24 +4,11 @@
 		<view class="section">
 			<text>表格</text>
 			<view>
-				<table class="lv-table">
-					<thead>
-						<tr>
-							<td>标题1</td><td>标题2</td><td>标题3</td><td>标题4</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>aaa</td><td>bbb</td><td>ccc</td><td rowspan="3">ddd</td>
-						</tr>
-						<tr>
-							<td colspan="2">aaabbb</td><td>ccc</td>
-						</tr>
-						<tr>
-							<td>aaa</td><td>bbb</td><td>ccc</td>
-						</tr>
-					</tbody>
-				</table>
+				<lv-table :data="tableData">
+					<lv-table-col label="姓名" prop="name"></lv-table-col>
+					<lv-table-col label="班级" prop="className"></lv-table-col>
+					<lv-table-col label="年龄" prop="age"></lv-table-col>
+				</lv-table>
 			</view>
 		</view>
 		
@@ -562,7 +549,12 @@
 					'hide-area': false	
 				},
 				scrollTop: 0,
-				realScrollTop: 0
+				realScrollTop: 0,
+				tableData: [
+					{ name: '张三', className: '三年一班', age: 11 },
+					{ name: '李四', className: '三年二班', age: 12 },
+					{ name: '王五', className: '三年一班', age: 10 }
+				]
 			}
 		},
 		onLoad() {
@@ -653,17 +645,5 @@
 	.section {
 		margin-bottom: 20upx;
 		background-color: #FFFFFF;
-	}
-	.lv-table {
-		width: 100%;
-		text-align: center;
-		border-collapse: collapse;
-		border: solid 1px;
-		
-		td {
-			border-style: solid;
-			border-width: 1px;
-			border-color: red;
-		}
 	}
 </style>

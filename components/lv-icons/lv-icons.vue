@@ -1,7 +1,7 @@
 <!-- 图标组件，支持字体图标或者图片类型图标 -->
 <template>
 	<text :style="{ color: color, 'font-size': size }" class="uni-icons flex" :class="{'move-loop': move}" @click="_onClick" v-if="icons[type]">{{icons[type]}}</text>
-	<image :style="{ width: size, height: size }" :class="{'move-loop': move}" :src="imageSrc" mode="aspectFit" @click="_onClick" v-else></image>
+	<image :style="{ width: size, height: size }" :class="{'move-loop': move}" :src="imgPath + type + '.png'" mode="aspectFit" @click="_onClick" v-else></image>
 </template>
 
 <script>
@@ -47,13 +47,12 @@
 		},
 		data() {
 			return {
-				icons: icons
+				icons: icons,
+				imgPath: '/static/components/lv-icons/'
 			}
 		},
 		computed: {
-			imageSrc () {
-				return require('./images/' + this.type + '.png');
-			}
+			
 		},
 		methods: {
 			_onClick() {
@@ -81,7 +80,9 @@
 	
 	/*循环转圈*/
 	.move-loop {
-	  animation: move-loop-anm 1s infinite linear;
+		/* #ifndef APP-NVUE */
+		animation: move-loop-anm 1s infinite linear;
+		/* #endif */
 	}
 	
 	@keyframes move-loop-anm {

@@ -2,16 +2,24 @@
 	<view class="w-picker-view">
 		<picker-view class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">{{item}}年</view>
+				<view class="w-picker-item" v-for="(item,index) in range.years" :key="index">
+					<text class="text">{{item}}年</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">{{item}}月</view>
+				<view class="w-picker-item" v-for="(item,index) in range.months" :key="index">
+					<text class="text">{{item}}月</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">{{item}}日</view>
+				<view class="w-picker-item" v-for="(item,index) in range.days" :key="index">
+					<text class="text">{{item}}日</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.sections" :key="index">{{item}}</view>
+				<view class="w-picker-item" v-for="(item,index) in range.sections" :key="index">
+					<text class="text">{{item}}</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 	</view>
@@ -343,4 +351,9 @@
 
 <style lang="scss">
 	@import "./w-picker.css";
+	.d-picker-view {
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 </style>

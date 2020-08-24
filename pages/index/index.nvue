@@ -1,123 +1,137 @@
 <template>
 	<view class="page">
 		
-		<view class="section">
-			<text>输入框</text>
-			<view style="padding-left: 20upx;padding-right: 20upx;">
-				<lv-input v-model="name" placeholder="请输入名称"></lv-input>
-				<lv-input v-model="password" type="password" placeholder="请输入密码"></lv-input>
-				<lv-input v-model="search" type="search" placeholder="请输入搜索内容">
-					<lv-icons slot="right" type="search" size="20px" />
-				</lv-input>
-				<lv-input v-model="name" type="captcha" :captcha="captchaUrl" placeholder="请输入图片验证码" @captcha="refreshCaptcha"></lv-input>
-				<lv-input ref="rsmscode" v-model="search" type="smscode" placeholder="请输入短信验证码" @send="clickSmscode"></lv-input>
-				<lv-input type="selector" placeholder="请选择性别" :selector="selector1" @change="handleSelectSex"></lv-input>
-				<lv-input type="time" placeholder="请选择时间" :selector="selectorTime" @change="handleSelectSex"></lv-input>
-				<lv-input type="date" placeholder="请选择日期" :selector="selectorDate" @change="handleSelectSex"></lv-input>
-				<lv-input type="range" placeholder="请选择起止时间" :selector="selectorRange" @change="handleSelectSex"></lv-input>
-				<lv-input type="half" placeholder="请选择上午下午" :selector="selectorHalf" @change="handleSelectSex"></lv-input>
-				<lv-input type="shortTerm" placeholder="请选择时间" :selector="selectorShortTerm" @change="handleSelectSex"></lv-input>
-				<lv-input type="region" placeholder="请选择地区" :selector="selectorRegion" @change="handleSelectSex"></lv-input>
-				
+		<!-- <view style="position: fixed;top: 0;left: 0;right: 0;bottom: 0;background-color: green;color: #FFFFFF;z-index: 1;">fix-1</view> -->
+		<!-- <view style="position: fixed;
+	  z-index: 1000;
+	  top: 0;
+	  right: 0;
+	  left: 0;
+	  bottom: 0;
+	  background-color: rgba(0, 0, 0, 0.6);
+	  transition: all 0.3s ease;"></view>
+		<view style="position: fixed;left: 0;right: 0;bottom: 0;height: 300px;background-color: rgba(255, 255, 0, 1);color: #FFFFFF;z-index: 3000;">fix-2</view>
+		 -->
+		<scroll-view class="contain" scroll-with-animation scroll-y="true" :show-scrollbar="false" :scroll-top="scrollTop" style="height: 90%;" @scroll="handleScroll" >
+			
+			<view class="section">
+				<text class="text">输入框</text>
+				<view style="padding-left: 20upx;padding-right: 20upx;">
+					<lv-input v-model="name" placeholder="请输入名称"></lv-input>
+					<lv-input v-model="password" type="password" placeholder="请输入密码"></lv-input>
+					<lv-input v-model="search" type="search" placeholder="请输入搜索内容">
+						<lv-icons slot="right" type="search" size="20px" color="#999" style="margin-left: 20upx;" />
+					</lv-input>
+					<lv-input v-model="name" type="captcha" :captcha="captchaUrl" placeholder="请输入图片验证码" @captcha="refreshCaptcha"></lv-input>
+					<lv-input ref="rsmscode" v-model="search" type="smscode" placeholder="请输入短信验证码" @send="clickSmscode"></lv-input>
+					<lv-input type="selector" placeholder="请选择性别" :selector="selector1" @change="handleSelectSex"></lv-input>
+					<lv-input type="time" placeholder="请选择时间" :selector="selectorTime" @change="handleSelectSex"></lv-input>
+					<lv-input type="date" placeholder="请选择日期" :selector="selectorDate" @change="handleSelectSex"></lv-input>
+					<lv-input type="range" placeholder="请选择起止时间" :selector="selectorRange" @change="handleSelectSex"></lv-input>
+					<lv-input type="half" placeholder="请选择上午下午" :selector="selectorHalf" @change="handleSelectSex"></lv-input>
+					<lv-input type="shortTerm" placeholder="请选择时间" :selector="selectorShortTerm" @change="handleSelectSex"></lv-input>
+					<lv-input type="region" placeholder="请选择地区" :selector="selectorRegion" @change="handleSelectSex"></lv-input>
+					
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text>开关</text>
-			<view>
-				<lv-switch :value.sync="swich" type="theme" :on-val="1" :off-val="2" left-text="开启" text="关闭" :before="beforeCheck"></lv-switch>
+			
+			<view class="section">
+				<text class="text">开关</text>
+				<view>
+					<lv-switch :value.sync="swich" type="theme" :on-val="1" :off-val="2" left-text="开启" text="关闭" :before="beforeCheck"></lv-switch>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text>单选框</text>
-			<view>
-				<lv-checkbox v-model="sex" type="primary" text="男" shape="circle" :val="1" plain></lv-checkbox>
-				<lv-checkbox v-model="sex" type="error" text="女" shape="circle" :val="2"></lv-checkbox>
-				<lv-checkbox v-model="sex" type="warning" text="青年" shape="circle" :val="3"></lv-checkbox>
-				<lv-checkbox v-model="sex" type="success" text="中年" shape="circle" :val="4"></lv-checkbox>
-				<lv-checkbox v-model="sex" type="theme" text="保密-主题" :val="5"></lv-checkbox>
-				<lv-checkbox v-model="sex" type="theme" text="确认选中" shape="circle" :val="6" :before="beforeCheck"></lv-checkbox>
-				<lv-checkbox v-model="sex" type="theme" text="禁用" shape="circle" :val="7" disabled></lv-checkbox>
+			
+			<view class="section">
+				<text class="text">单选框</text>
+				<view>
+					<lv-checkbox v-model="sex" type="primary" text="男" shape="circle" :val="1" plain></lv-checkbox>
+					<lv-checkbox v-model="sex" type="error" text="女" shape="circle" :val="2"></lv-checkbox>
+					<lv-checkbox v-model="sex" type="warning" text="青年" shape="circle" :val="3"></lv-checkbox>
+					<lv-checkbox v-model="sex" type="success" text="中年" shape="circle" :val="4"></lv-checkbox>
+					<lv-checkbox v-model="sex" type="theme" text="保密-主题" :val="5"></lv-checkbox>
+					<lv-checkbox v-model="sex" type="theme" text="确认选中" shape="circle" :val="6" :before="beforeCheck"></lv-checkbox>
+					<lv-checkbox v-model="sex" type="theme" text="禁用" shape="circle" :val="7" disabled></lv-checkbox>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text>复选框</text>
-			<view>
-				<lv-checkbox v-model="like" type="primary" text="读书" :val="1" plain></lv-checkbox>
-				<lv-checkbox v-model="like" type="error" text="写字" :val="2"></lv-checkbox>
-				<lv-checkbox v-model="like" type="warning" text="电影" :val="3"></lv-checkbox>
-				<lv-checkbox v-model="like" type="success" text="旅行" shape="circle" :val="4"></lv-checkbox>
-				<lv-checkbox v-model="like" type="theme" text="朗诵-主题" :val="5"></lv-checkbox>
-				<lv-checkbox v-model="like" type="theme" text="确认选中" :val="6" :before="beforeCheck"></lv-checkbox>
-				<lv-checkbox v-model="like" type="theme" text="禁用" :val="7" disabled></lv-checkbox>
+			
+			<view class="section">
+				<text class="text">复选框</text>
+				<view>
+					<lv-checkbox v-model="like" type="primary" text="读书" :val="1" plain></lv-checkbox>
+					<lv-checkbox v-model="like" type="error" text="写字" :val="2"></lv-checkbox>
+					<lv-checkbox v-model="like" type="warning" text="电影" :val="3"></lv-checkbox>
+					<lv-checkbox v-model="like" type="success" text="旅行" shape="circle" :val="4"></lv-checkbox>
+					<lv-checkbox v-model="like" type="theme" text="朗诵-主题" :val="5"></lv-checkbox>
+					<lv-checkbox v-model="like" type="theme" text="确认选中" :val="6" :before="beforeCheck"></lv-checkbox>
+					<lv-checkbox v-model="like" type="theme" text="禁用" :val="7" disabled></lv-checkbox>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text>tag标记</text>
-			<view class="flex">
-				<lv-tag radius="" text="默认" @click="tip('点击了tag-default')"></lv-tag>
-				<lv-tag radius="small" text="主要" type="primary" @click="tip('点击了tag-primary')"></lv-tag>
-				<lv-tag radius="half" text="错误" type="error" @click="tip('点击了tag-error')"></lv-tag>
-				<lv-tag radius="" text="警告" type="warning" @click="tip('点击了tag-warning')"></lv-tag>
-				<lv-tag radius="small" text="成功" type="success" @click="tip('点击了tag-success')"></lv-tag>
-				<lv-tag radius="" text="主题" type="theme" @click="tip('点击了tag-theme')"></lv-tag>
-				<lv-tag radius="half" text="主要" type="primary" plain @click="tip('点击了tag-primary plain')"></lv-tag>
-				<lv-tag radius="" text="错误" type="error" plain @click="tip('点击了tag-error plain')"></lv-tag>
-				<lv-tag radius="small" text="警告" type="warning" plain @click="tip('点击了tag-warning plain')"></lv-tag>
-				<lv-tag radius="half" text="成功" type="success" plain @click="tip('点击了tag-success plain')"></lv-tag>
-				<lv-tag radius="small" text="主题" type="theme" plain @click="tip('点击了tag-theme plain')"></lv-tag>
-				<lv-tag radius="" text="自定义" type="tag-xl" @click="tip('点击了自定义tag')"></lv-tag>
+			
+			<view class="section">
+				<text class="text">tag标记</text>
+				<view class="flex">
+					<lv-tag radius="" text="默认" @click="tip('点击了tag-default')"></lv-tag>
+					<lv-tag radius="small" text="主要" type="primary" @click="tip('点击了tag-primary')"></lv-tag>
+					<lv-tag radius="half" text="错误" type="error" @click="tip('点击了tag-error')"></lv-tag>
+					<lv-tag radius="" text="警告" type="warning" @click="tip('点击了tag-warning')"></lv-tag>
+					<lv-tag radius="small" text="成功" type="success" @click="tip('点击了tag-success')"></lv-tag>
+					<lv-tag radius="" text="主题" type="theme" @click="tip('点击了tag-theme')"></lv-tag>
+					<lv-tag radius="half" text="主要" type="primary" plain @click="tip('点击了tag-primary plain')"></lv-tag>
+					<lv-tag radius="" text="错误" type="error" plain @click="tip('点击了tag-error plain')"></lv-tag>
+					<lv-tag radius="small" text="警告" type="warning" plain @click="tip('点击了tag-warning plain')"></lv-tag>
+					<lv-tag radius="half" text="成功" type="success" plain @click="tip('点击了tag-success plain')"></lv-tag>
+					<lv-tag radius="small" text="主题" type="theme" plain @click="tip('点击了tag-theme plain')"></lv-tag>
+					<lv-tag radius="" text="自定义" type="tag-xl" @click="tip('点击了自定义tag')"></lv-tag>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text>图片</text>
-			<view class="flex">
-				<lv-image style="width: 100%;" src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg"></lv-image>
+			
+			<view class="section">
+				<text class="text">图片</text>
+				<view class="flex">
+					<lv-image style="flex: 1;" src="https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg"></lv-image>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text class="text">按钮</text>
-			<view>
-				<lv-button radius="" text="default" @click="tip('点击了按钮-default')"></lv-button>
-				<lv-button radius="small" type="primary" text="primary" @click="tip('点击了按钮-primary')"></lv-button>
-				<lv-button radius="half" type="error" text="error" @click="tip('点击了按钮-error')"></lv-button>
-				<lv-button radius="" type="warning" text="warning" @click="tip('点击了按钮-warning')"></lv-button>
-				<lv-button radius="small" type="success" text="success" @click="tip('点击了按钮-success')"></lv-button>
-				<lv-button radius="small" type="theme" text="主题色" @click="tip('点击了按钮-theme')"></lv-button>
-				<lv-button radius="half" type="primary" plain text="primary" @click="tip('点击了按钮-primary plain')"></lv-button>
-				<lv-button radius="" type="error" plain text="error" @click="tip('点击了按钮-error plain')"></lv-button>
-				<lv-button radius="small" type="warning" plain text="warning" @click="tip('点击了按钮-warning plain')"></lv-button>
-				<lv-button loading radius="half" type="success" plain text="加载" @click="tip('点击了按钮-加载')"></lv-button>
-				<lv-button radius="half" type="theme" plain text="主题色" @click="tip('点击了按钮-theme')"></lv-button>
-				<lv-button icon="aq" type="success" text="带图标" @click="tip('点击了按钮-带图标')"></lv-button>
-				<lv-button radius="small" type="error" disabled text="禁用" @click="tip('点击了按钮-禁用')"></lv-button>
-				<lv-button radius="small" type="btn-xl" text="自定义按钮" @click="tip('点击了自定义按钮')"></lv-button>
-				<lv-button radius="small" type="btn-xl" plain text="自定义按钮" @click="tip('点击了自定义按钮')"></lv-button>
-				<lv-button ref="scode" radius="half" type="success" time="60" text="倒计时" @click="clkScode"></lv-button>
+			
+			<view class="section">
+				<text class="text">按钮</text>
+				<view>
+					<lv-button radius="" text="default" @click="tip('点击了按钮-default')"></lv-button>
+					<lv-button radius="small" type="primary" text="primary" @click="tip('点击了按钮-primary')"></lv-button>
+					<lv-button radius="half" type="error" text="error" @click="tip('点击了按钮-error')"></lv-button>
+					<lv-button radius="" type="warning" text="warning" @click="tip('点击了按钮-warning')"></lv-button>
+					<lv-button radius="small" type="success" text="success" @click="tip('点击了按钮-success')"></lv-button>
+					<lv-button radius="small" type="theme" text="主题色" @click="tip('点击了按钮-theme')"></lv-button>
+					<lv-button radius="half" type="primary" plain text="primary" @click="tip('点击了按钮-primary plain')"></lv-button>
+					<lv-button radius="" type="error" plain text="error" @click="tip('点击了按钮-error plain')"></lv-button>
+					<lv-button radius="small" type="warning" plain text="warning" @click="tip('点击了按钮-warning plain')"></lv-button>
+					<lv-button loading radius="half" type="success" plain text="加载" @click="tip('点击了按钮-加载')"></lv-button>
+					<lv-button radius="half" type="theme" plain text="主题色" @click="tip('点击了按钮-theme')"></lv-button>
+					<lv-button icon="aq" type="success" text="带图标" @click="tip('点击了按钮-带图标')"></lv-button>
+					<lv-button radius="small" type="error" disabled text="禁用" @click="tip('点击了按钮-禁用')"></lv-button>
+					<lv-button radius="small" type="btn-xl" text="自定义按钮" @click="tip('点击了自定义按钮')"></lv-button>
+					<lv-button radius="small" type="btn-xl" plain text="自定义按钮" @click="tip('点击了自定义按钮')"></lv-button>
+					<lv-button ref="scode" radius="half" type="success" time="60" text="倒计时" @click="clkScode"></lv-button>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text class="text">字体图标</text>
-			<view class="flex">
-				<lv-icons :type="key" :color="icon.color" :size="icon.size" v-for="(val,key) in icon.list" :key="key"></lv-icons>
+			
+			<view class="section">
+				<text>字体图标</text>
+				<view class="flex">
+					<lv-icons :type="key" :color="icon.color" :size="icon.size" v-for="(val,key) in icon.list" :key="key"></lv-icons>
+				</view>
 			</view>
-		</view>
-		
-		<view class="section">
-			<text class="text">图片图标</text>
-			<view class="flex">
-				<lv-icons type="aq" size="30px"></lv-icons>
-				<lv-icons type="fp" size="40px"></lv-icons>
-				<lv-icons type="wz" size="50px"></lv-icons>
+			
+			<view class="section">
+				<text>图片图标</text>
+				<view class="flex">
+					<lv-icons type="aq" size="30px"></lv-icons>
+					<lv-icons type="fp" size="40px"></lv-icons>
+					<lv-icons type="wz" size="50px"></lv-icons>
+				</view>
 			</view>
-		</view>
-		
+			
+		</scroll-view>
 	</view>
 </template>
 
@@ -363,12 +377,7 @@
 					'hide-area': false	
 				},
 				scrollTop: 0,
-				realScrollTop: 0,
-				tableData: [
-					{ name: '张三', className: '三年一班', age: 11 },
-					{ name: '李四', className: '三年二班', age: 12 },
-					{ name: '王五', className: '三年一班', age: 10 }
-				]
+				realScrollTop: 0
 			}
 		},
 		onLoad() {
@@ -453,12 +462,17 @@
 </script>
 
 <style scoped lang="scss">
-	.page {
-		
+	.page {}
+	.contain {
+		flex: 1;
 	}
 	.section {
 		margin-bottom: 20upx;
+		padding-left: 20upx;
+		padding-right: 20upx;
 		background-color: #FFFFFF;
 	}
-	
+	.text {
+		font-size: 30upx;
+	}
 </style>

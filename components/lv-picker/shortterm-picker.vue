@@ -2,13 +2,19 @@
 	<view class="w-picker-view">
 		<picker-view class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.dates" :key="index">{{item.label}}</view>
+				<view class="w-picker-item" v-for="(item,index) in range.dates" :key="index">
+					<text class="text">{{item.label}}</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">{{item.label}}时</view>
+				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">
+					<text class="text">{{item.label}}时</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">{{item.label}}分</view>
+				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">
+					<text class="text">{{item.label}}分</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 	</view>
@@ -247,4 +253,9 @@
 
 <style lang="scss">
 	@import "./w-picker.css";
+	.d-picker-view {
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 </style>

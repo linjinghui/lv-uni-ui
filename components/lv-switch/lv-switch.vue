@@ -6,10 +6,12 @@
 		@touchend="mouseup"
 		@click="_onClick">
 		<text class="left-text" v-if="leftText">{{leftText}}</text>
-		<view class="switch flex" :class="[selected && theme]" :style="{width: 'calc(' + size + ' * 2)', height: size}">
-			<view class="switch-bar" :class="{'switch-bar-on': selected}" :style="{width: size, height: size}"></view>
+		<!--  :style="{width: 'calc(' + size + ' * 2)', height: size}" -->
+		<view class="switch flex" :class="[selected && theme]" :style="{ 'width': multiplySize(2), 'height': size }">
+			<view class="switch-bar" :style="{width: size, height: size, left: selected ? size : 0}"></view>
 		</view>
-		<slot></slot>
+		<!-- <view class="switch flex" :style="{width: '100px', height: size}"></view> -->
+		<text class="text">{{text}}</text>
 	</view>
 </template>
 
@@ -46,6 +48,10 @@
 			// 复选框大小
 			size: {
 				default: '38upx'
+			},
+			// 文本
+			text: {
+				default: ''
 			},
 			// 操作前执行，运行done回调，执行后续选中或取消选中功能
 			before: {
@@ -95,6 +101,13 @@
 			handleClick () {
 				this.$emit('update:value', this.value === this.onVal ? this.offVal : this.onVal);
 				this.$emit('input', this.value === this.onVal ? this.offVal : this.onVal);
+			},
+			// 计算：size乘以倍数
+			multiplySize (data) {
+				let num = this.size.match(/\d+/g);
+				num = (num || []).join('.');
+				let unit = this.size.replace(num, '');
+				return (num * data) + unit;
 			}
 		}
 	}
@@ -107,6 +120,10 @@
 	}
 	.left-text {
 		margin-right: 4px;
+		font-size: 14px;
+	}
+	.text {
+		font-size: 14px;
 	}
 	.switch {
 		position: relative;
@@ -117,18 +134,21 @@
 		border-color: $lv-border-color;
 		border-radius: 50px;
 		background-color: #CCCCCC;
+		/* #ifndef APP-NVUE */
 		transition: all .2s;
+		/* #endif */
 	}
 	.switch-bar {
 		position: absolute;
 		top: 0;
 		left: 0;
+		/* #ifdef APP-NVUE */
+		top: -1px;
+		left: 0;
+		/* #endif */
 		border-radius: 50px;
 		background-color: #FFFFFF;
-		transition: all .2s;
-	}
-	.switch-bar-on {
-		left: 50%;
+		transition: left .2s;
 	}
 	// 点击激活
 	.active {

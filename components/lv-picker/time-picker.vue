@@ -2,13 +2,19 @@
 	<view class="w-picker-view">
 		<picker-view class="d-picker-view" :indicator-style="itemHeight" :value="pickVal" @change="handlerChange">
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">{{item}}时</view>
+				<view class="w-picker-item" v-for="(item,index) in range.hours" :key="index">
+					<text class="text">{{item}}时</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column>
-				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">{{item}}分</view>
+				<view class="w-picker-item" v-for="(item,index) in range.minutes" :key="index">
+					<text class="text">{{item}}分</text>
+				</view>
 			</picker-view-column>
 			<picker-view-column v-if="second">
-				<view class="w-picker-item" v-for="(item,index) in range.seconds" :key="index">{{item}}秒</view>
+				<view class="w-picker-item" v-for="(item,index) in range.seconds" :key="index">
+					<text class="text">{{item}}秒</text>
+				</view>
 			</picker-view-column>
 		</picker-view>
 	</view>
@@ -214,5 +220,10 @@
 
 <style lang="scss">
 	@import "./w-picker.css";	
+	.d-picker-view {
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 </style>
 

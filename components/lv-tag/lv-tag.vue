@@ -5,12 +5,11 @@
 		@touchstart="mousedown"
 		@touchend="mouseup"
 		@click="_onClick">
-		<slot></slot>
+		<text class="lv-tag-text" :class="theme">{{text}}</text>
 	</view>
 </template>
 
 <script>
-	
 	export default {
 		name: 'LvTag',
 		props: {
@@ -46,6 +45,11 @@
 			disabled: {
 				type: Boolean,
 				default: false
+			},
+			// 文本
+			text: {
+				type: String,
+				default: ''
 			}
 		},
 		data() {
@@ -88,9 +92,13 @@
 		border-width: 1px;
 		border-style: solid;
 		border-color: $lv-border-color;
-		font-size: 24upx;
 		background-color: #FFFFFF;
+		/* #ifndef APP-NVUE */
 		transition: all .3s;
+		/* #endif */
+	}
+	.lv-tag-text {
+		font-size: 24upx;
 	}
 	// 导角设置
 	.radius-small {
